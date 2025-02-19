@@ -15,10 +15,10 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths()
   ],
-  // build: {
-  //   outDir: "build", 
-  //   rollupOptions: {
-  //     input: "app/root.tsx", 
-  //   },
-  // }
+  build: {
+    outDir: "build", 
+    rollupOptions: {
+      input: "app/root.tsx", 
+    },
+  }
 });
