@@ -13,7 +13,7 @@ export const app = express();
 app.use(express.json());
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? [""]
+    ? ["client-shr-production.up.railway.app"]
     : ["http://localhost:5173"];
 
 function normalizeOrigin(origin) {
