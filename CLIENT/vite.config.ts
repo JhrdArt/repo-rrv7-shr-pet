@@ -1,7 +1,6 @@
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-import { env } from "process";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -11,7 +10,8 @@ export default defineConfig({
       "~": path.resolve(__dirname, "app")
     },
   },
-  plugins: [tailwindcss(), 
+  plugins: [
+    tailwindcss(), 
     reactRouter(),
     tsconfigPaths()
   ],
@@ -20,5 +20,5 @@ export default defineConfig({
     rollupOptions: {
       input: "app/root.tsx", 
     },
-  }
+  },
 });
