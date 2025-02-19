@@ -11,9 +11,30 @@ import ProductModel from "./src/schema/product-schema.js";
 export const app = express();
 
 app.use(express.json());
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? ["frontend-repo-rrv7-shr-pet-production.up.railway.app"]
+    : ["http://localhost:5173"];
+
+function normalizeOrigin(origin) {
+  return origin.endsWith("/") ? origin.slice(0, -1) : origin;
+}
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || " http://localhost:3001",
+    origin: (origin, callback) => {
+      if (process.env.NODE_ENV !== "production") {
+        return callback(null, true);
+      }
+      if (!origin || allowedOrigins.includes(normalizeOrigin(origin))) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
